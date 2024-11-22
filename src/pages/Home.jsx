@@ -1,9 +1,10 @@
 import React from "react";
 import { GoPrimitiveDot } from "react-icons/go";
-
+import { IoNotifications , IoPeople } from "react-icons/io5";
+import { FaWpforms } from "react-icons/fa";
+import { MdEvent } from "react-icons/md";
 import { Button, SparkLine, StackedChart } from "../components";
 import {
-  salesActivity,
   SparklineAreaData,
   ecomPieChartData,
   stackedCustomSeries,
@@ -12,7 +13,54 @@ import {
 } from "../data/dummy";
 import { useStateContext } from "../contexts/ContextProvider";
 
-const Ecommerce = () => {
+const salesActivity = [
+  {
+    icon: <IoNotifications />,
+    amount: '39,354',
+    
+    /* percentage: '-4%', */
+    title: 'Notices',
+    label: 'Notices',
+    iconColor: '#03C9D7',
+    iconBg: '#E5FAFB',
+    /* pcColor: 'red-600', */
+  },
+  {
+    icon: <MdEvent />,
+    amount: '4,396',
+    
+    /*  percentage: '+23%', */
+    title: 'Events',
+    label: 'Events',
+    iconColor: 'rgb(255, 244, 229)',
+    iconBg: 'rgb(254, 201, 15)',
+    /* pcColor: 'green-600', */
+  },
+  {
+    icon: <IoPeople />,
+    amount: '423,39',
+
+    /* percentage: '+38%', */
+    title: 'Members',
+    label: 'Members',
+    iconColor: 'rgb(228, 106, 118)',
+    iconBg: 'rgb(255, 244, 229)',
+    /* pcColor: 'green-600', */
+  },
+  {
+    icon: <FaWpforms />,
+    amount: '39,354',
+   
+    /* percentage: '-12%', */
+    title: 'Feedbacks',
+    label: 'Feedbacks',
+    iconColor: 'rgb(0, 194, 146)',
+    iconBg: 'rgb(235, 250, 242)',
+    /* pcColor: 'red-600', */
+  },
+];
+
+const Home = () => {
   const { currentColor } = useStateContext();
   return (
     <div className="mt-12">
@@ -77,10 +125,8 @@ const Ecommerce = () => {
                   {item.percentage}
                 </span> */}
               </p>
-              <span className="text-sm font-extralight text-gray-500 text-center">
-                {item.text}
-              </span>
-              <p className="text-sm font-thin mt-1">{item.label}</p>
+            
+              <p className="text-md font-semibold mt-1">{item.label}</p>
             </div>
           ))}
         </div>
@@ -159,4 +205,4 @@ const Ecommerce = () => {
   );
 };
 
-export default Ecommerce;
+export default Home;

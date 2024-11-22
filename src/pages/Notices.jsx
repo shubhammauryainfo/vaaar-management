@@ -5,7 +5,7 @@ import { ordersData, /* contextMenuItems */ ordersGrid } from '../data/dummy';
 import { Header } from '../components';
 /* import { useStateContext } from '../contexts/ContextProvider'; */
 
-const Orders = ( ) => {
+const Notices = ( ) => {
   /* const { currentMode } = useStateContext(); */
 
   return (
@@ -28,4 +28,4 @@ const Orders = ( ) => {
   )
 }
 
-export default Orders
+export default Notices
