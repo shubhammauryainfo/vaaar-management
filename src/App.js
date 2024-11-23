@@ -9,7 +9,7 @@ import {
 // import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
 import { Navbar, Footer, Sidebar, Settings } from './components';
-import { Home, Notices, Calendar, Members, Stacked, Pyramid, Line, Bar, Area, Customers, Financial, ColorMapping, Pie} from './pages';
+import { Home, Notices, Calendar, Members, Stacked, Pyramid, Line, Bar, Area, Feedbacks, Financial, ColorMapping, Pie} from './pages';
 
 import { useStateContext } from './contexts/ContextProvider';
 
@@ -58,7 +58,7 @@ const App = () => {
                 {/* Pages */}
                 <Route path="/notices" element={<Notices />} />
                 <Route path="/members" element={<Members />} />
-                <Route path="/customers" element={<Customers />} />
+                <Route path="/feedbacks" element={<Feedbacks />} />
 
                 {/* Apps */}
                 <Route path="/calendar" element={<Calendar />} />

@@ -1,7 +1,7 @@
 export { default as Home } from './Home';
 export { default as Notices } from './Notices';
 export { default as Members } from './Members';
-export { default as Customers } from './Customers';
+export { default as Feedbacks } from './Feedbacks';
 export { default as Calendar } from './Calendar';
 export { default as Area } from './Charts/Area';
 export { default as Bar } from './Charts/Bar';
