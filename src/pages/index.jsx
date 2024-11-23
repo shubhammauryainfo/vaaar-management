@@ -1,6 +1,6 @@
 export { default as Home } from './Home';
 export { default as Notices } from './Notices';
-export { default as Employees } from './Employees';
+export { default as Members } from './Members';
 export { default as Customers } from './Customers';
 export { default as Calendar } from './Calendar';
 export { default as Area } from './Charts/Area';

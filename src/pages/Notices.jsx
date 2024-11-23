@@ -10,7 +10,7 @@ const Notices = ( ) => {
 
   return (
     <div className="m-2 md:m-10 sm:mt-24 p-2 md:p-4 bg-white rounded-3xl">
-      <Header category="Page" title="Orders" />
+      <Header category="Page" title="Notices" />
       <GridComponent
         id="gridcomp"
         dataSource={ordersData}

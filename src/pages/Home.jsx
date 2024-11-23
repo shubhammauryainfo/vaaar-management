@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { GoPrimitiveDot } from "react-icons/go";
 import { IoNotifications , IoPeople } from "react-icons/io5";
 import { FaWpforms } from "react-icons/fa";
@@ -13,55 +13,104 @@ import {
 } from "../data/dummy";
 import { useStateContext } from "../contexts/ContextProvider";
 
-const salesActivity = [
-  {
-    icon: <IoNotifications />,
-    amount: '39,354',
-    
-    /* percentage: '-4%', */
-    title: 'Notices',
-    label: 'Notices',
-    iconColor: '#03C9D7',
-    iconBg: '#E5FAFB',
-    /* pcColor: 'red-600', */
-  },
-  {
-    icon: <MdEvent />,
-    amount: '4,396',
-    
-    /*  percentage: '+23%', */
-    title: 'Events',
-    label: 'Events',
-    iconColor: 'rgb(255, 244, 229)',
-    iconBg: 'rgb(254, 201, 15)',
-    /* pcColor: 'green-600', */
-  },
-  {
-    icon: <IoPeople />,
-    amount: '423,39',
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+const API_KEY = process.env.REACT_APP_API_KEY;
 
-    /* percentage: '+38%', */
-    title: 'Members',
-    label: 'Members',
-    iconColor: 'rgb(228, 106, 118)',
-    iconBg: 'rgb(255, 244, 229)',
-    /* pcColor: 'green-600', */
-  },
-  {
-    icon: <FaWpforms />,
-    amount: '39,354',
-   
-    /* percentage: '-12%', */
-    title: 'Feedbacks',
-    label: 'Feedbacks',
-    iconColor: 'rgb(0, 194, 146)',
-    iconBg: 'rgb(235, 250, 242)',
-    /* pcColor: 'red-600', */
-  },
-];
+// console.log("Base URL:", API_BASE_URL); // Debug
+// console.log("API Key:", API_KEY);       // Debug
+
+// console.log(process.env);
+
 
 const Home = () => {
   const { currentColor } = useStateContext();
+  const [stats, setStats] = useState({
+    notices: 0,
+    events: 0,
+    members: 0,
+    feedbacks: 0,
+    funds: 0,
+  });
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const headers = {
+        "api-key": API_KEY,
+        };
+
+        const endpoints = [
+          `${API_BASE_URL}/api/notices`,
+          `${API_BASE_URL}/api/events`,
+          // `${API_BASE_URL}/api/members`,
+          `${API_BASE_URL}/api/forms`,
+          // `${API_BASE_URL}/api/funds`,
+        ];
+
+        const responses = await Promise.all(
+          endpoints.map((url) => fetch(url, { headers }))
+        );
+
+        const [notices,
+           events,
+            forms,
+            // members,
+            // funds
+          ] = await Promise.all(
+          responses.map((res) => res.json())
+        );
+
+        setStats({
+          notices: notices.length || 0, 
+          events: events.length || 0,  
+          feedbacks: forms.length || 0,
+          // members: members.length || 0,
+          // funds: funds.total || 0, 
+        });
+      } catch (error) {
+        console.error("Failed to fetch stats:", error);
+      }
+    };
+
+    fetchStats();
+  }, []);
+
+  const VaaarDetails = [
+    {
+      icon: <IoNotifications />,
+      amount: stats.notices,
+      title: "Notices",
+      label: "Notices",
+      iconColor: "#03C9D7",
+      iconBg: "#E5FAFB",
+    },
+    {
+      icon: <MdEvent />,
+      amount: stats.events,
+      title: "Events",
+      label: "Events",
+      iconColor: "rgb(255, 244, 229)",
+      iconBg: "rgb(254, 201, 15)",
+    },
+    {
+      icon: <IoPeople />,
+      amount: 50,
+      title: "Members",
+      label: "Members",
+      iconColor: "rgb(228, 106, 118)",
+      iconBg: "rgb(255, 244, 229)",
+    },
+    {
+      icon: <FaWpforms />,
+      amount: stats.feedbacks,
+      title: "Feedbacks",
+      label: "Feedbacks",
+      iconColor: "rgb(0, 194, 146)",
+      iconBg: "rgb(235, 250, 242)",
+    },
+  ];
+
+
   return (
     <div className="mt-12">
       <div className="flex flex-wrap lg:flex-nowrap justify-center">
@@ -69,7 +118,9 @@ const Home = () => {
           <div className="flex justify-between items-center">
             <div>
               <p className="font-bold text-4xl dark:text-gray-400 text-white">Funds</p>
-              <p className="text-2xl mt-2b">$45,567.56</p>
+              <p className="text-2xl mt-2b">$45,567.56
+              {/* ${stats.funds} */}
+              </p>
             </div>
           </div>
           {/* <div className="mt-6">
@@ -107,7 +158,7 @@ const Home = () => {
           ))}
         </div> */}
         <div className=" flex m-3 flex-wrap justify-center gap-1 items-center">
-          {salesActivity.map((item) => (
+          {VaaarDetails.map((item) => (
             <div
               key={item.title}
               className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg md:w-40 p-4 pt-4 rounded-2xl text-center border border-gray-100 dark:border-gray-600"
@@ -158,7 +209,7 @@ const Home = () => {
                     23%
                   </span>
                 </p>
-                <p className="text-gray-500 mt-1">Budget</p>
+                <p className="text-gray-500 mt-1">Budgets</p>
               </div>
               <div className="mt-8">
                 <p>

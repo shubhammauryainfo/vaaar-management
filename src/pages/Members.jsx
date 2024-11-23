@@ -4,10 +4,10 @@ import { GridComponent, ColumnsDirective, ColumnDirective, Page, Search, Inject,
 import { employeesData, employeesGrid } from '../data/dummy';
 import { Header } from '../components';
 
-const Employees = ( ) => {
+const Members = ( ) => {
   return (
     <div className="m-2 md:m-10 sm:mt-24 p-2 md:p-4 bg-white rounded-3xl">
-      <Header category="Page" title="Employees" />
+      <Header category="Page" title="Members" />
       <GridComponent
         dataSource={employeesData}
         allowPaging
@@ -26,4 +26,4 @@ const Employees = ( ) => {
   )
 }
 
-export default Employees
+export default Members
